@@ -246,7 +246,8 @@ AutoCollectCoins.MouseButton1Down:Connect(function()
 		AutoCollectCoins.BackgroundColor3 = Color3.fromRGB(0,255,0)
 		while c do
 			wait()
-			
+		
+			if is_synapse_function or is_protosmasher_closure then
 		
 			for i,v in pairs(game:GetService("Workspace").CoinEvent:GetDescendants()) do
 				if v.Name == "TouchInterest" then
@@ -254,10 +255,25 @@ AutoCollectCoins.MouseButton1Down:Connect(function()
 					wait()
 					firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,v.Parent,1)
 				end
+		end
+			else
+			    for i2,v2 in pairs(game:GetService("Workspace").CoinEvent:GetDescendants()) do
+				if v2.ClassName == "MeshPart" then
+			 v2.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame 
+			 wait(0.1)
+
+			
 			end
+			end
+			end
+			
+
+	
+	
 			
 			
 		end
+		
 	else
 		c = false
 		AutoCollectCoins.Text = ""
