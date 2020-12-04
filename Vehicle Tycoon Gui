@@ -195,18 +195,21 @@ AutoFarmCar.MouseButton1Down:Connect(function()
 		b = true
 		AutoFarmCar.Text = tik
 		AutoFarmCar.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
-		while b do
-			wait()
-		
-			if game:GetService("Workspace").Vehicles[game.Players.LocalPlayer.Name] then
-				for i,v in pairs(game:GetService("Workspace").Vehicles[game.Players.LocalPlayer.Name]:GetDescendants()) do
-					if v.ClassName == "Part" then
-						v.CFrame = game:GetService("Workspace").Snow.CFrame
+		game:GetService("RunService").Heartbeat:Connect(function()
+		    if b then
+game:GetService("Workspace").Vehicles[game.Players.LocalPlayer.Name].Network.sitOn:FireServer("Driver")
+game:GetService("Workspace").Vehicles[game.Players.LocalPlayer.Name].Network.Exit:FireServer()
+end
+end)
+
+for i,v in pairs(game:GetService("Workspace").Vehicles[game.Players.LocalPlayer.Name]:GetDescendants()) do
+    if v.ClassName == "Part" then
+        v.CFrame = game:GetService("Workspace").Snow.CFrame * CFrame.new(5,-30,0)
+    end
 end
 
-					end
-				end
-		end
+
+		
 	else
 		b = false
 		AutoFarmCar.Text = ""
